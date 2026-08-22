@@ -1,18 +1,22 @@
-class Solution:
-    def isSameTree(self, p, q):
+class Solution(object):
+    def checkDivisibility(self, n):
+        original = n
+        sum_digits = 0
+        product_digits = 1
 
-        # Both nodes are empty
-        if p is None and q is None:
+        while n > 0:
+            digits = n % 10
+            sum_digits = sum_digits + digits
+            product_digits = product_digits*digits
+
+            n = n//10
+
+        sum_all = sum_digits + product_digits
+
+        if original % sum_all == 0:
             return True
-
-        # One is empty and the other is not
-        if p is None or q is None:
+        else:
             return False
+        
 
-        # Values are different
-        if p.val != q.val:
-            return False
-
-        # Check left and right subtrees
-        return self.isSameTree(p.left, q.left) and \
-               self.isSameTree(p.right, q.right)
+        
