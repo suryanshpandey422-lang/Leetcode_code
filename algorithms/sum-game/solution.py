@@ -1,22 +1,13 @@
-class Solution(object):
-    def checkDivisibility(self, n):
-        original = n
-        sum_digits = 0
-        product_digits = 1
+class Solution:
+    def sumGame(self, num):
+        n = len(num) // 2
+        left = num[:n]
+        right = num[n:]
 
-        while n > 0:
-            digits = n % 10
-            sum_digits = sum_digits + digits
-            product_digits = product_digits*digits
+        a = sum(int(x) for x in left if x != '?')
+        b = sum(int(x) for x in right if x != '?')
 
-            n = n//10
+        x = left.count('?')
+        y = right.count('?')
 
-        sum_all = sum_digits + product_digits
-
-        if original % sum_all == 0:
-            return True
-        else:
-            return False
-        
-
-        
+        return 2 * (a - b) != 9 * (y - x)
